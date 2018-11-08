@@ -38,9 +38,9 @@ namespace MyShop.DataAccess.InMemory
         //check for the product by Id and updates it 
         public void Update(Product product)
         {
-            Product productToUpdate = products.Find(p =>p.Id == product.Id);
+            Product productToUpdate = products.Find(p => p.Id == product.Id);
 
-            if(productToUpdate != null)
+            if (productToUpdate != null)
             {
                 productToUpdate = product;
             }
@@ -74,9 +74,11 @@ namespace MyShop.DataAccess.InMemory
 
 
         //Checks for Products by Id and deletes it
+       
         public void Delete(string Id)
         {
             Product productToDelete = products.Find(p => p.Id == Id);
+
 
             if (productToDelete != null)
             {
@@ -84,8 +86,10 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("object not found");
+                throw new Exception("product not found");
             }
+           
         }
+    
     }
 }
