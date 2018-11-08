@@ -22,6 +22,8 @@ namespace MyShop.Core.Models
         public string Category { get; set; }
         public string Image { get; set; }
 
+
+        //Cream un Id de fiecare data cand este creata o instanta a lui Product
         public Product()
         {
             this.Id = Guid.NewGuid().ToString();
