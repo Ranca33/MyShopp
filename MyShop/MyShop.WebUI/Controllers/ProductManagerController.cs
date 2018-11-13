@@ -103,7 +103,6 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
-                context.Delete(Id);
                 return View(productToDelete);
             }
         }
