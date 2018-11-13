@@ -17,7 +17,7 @@ namespace MyShop.WebUI.Controllers
         {
             context = new ProductRepository();
         }
-
+         
         // GET: ProductManager
         public ActionResult Index()
         {

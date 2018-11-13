@@ -13,7 +13,7 @@ namespace MyShop.DataAccess.InMemory
         ObjectCache cache = MemoryCache.Default;
         List<Product> products;
 
-        //La apelare, cauta in cache sa vadaca daca este un cache numit products
+        //La apelare, cauta in cache sa vadaca daca este un cache numit products, daca nu creaza o lista de products 
         public ProductRepository()
         {
             products = cache["products"] as List<Product>;
