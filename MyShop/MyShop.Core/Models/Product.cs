@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace MyShop.Core.Models
 {
-    public class Product
+    public class Product :BaseEntity
     {
-        public string Id { get; set; }
-
         [StringLength(20)]
         [DisplayName("Product Name")]
         public string Name { get; set; }
@@ -23,10 +21,6 @@ namespace MyShop.Core.Models
         public string Image { get; set; }
 
 
-        //Cream un Id de fiecare data cand este creata o instanta a lui Product
-        public Product()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+        
     }
 }
