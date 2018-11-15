@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyShop.Core.Contracts;
 using MyShop.Core.Models;
 using MyShop.Core.ViewModels;
 using MyShop.DataAccess.InMemory;
@@ -12,14 +13,17 @@ namespace MyShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         //load curent product and praductCategory from data base
-        InMemoryRepository<Product> context;
-        InMemoryRepository<ProductCategory> productCategories;
+        IRepository<Product> context;
+        IRepository<ProductCategory> productCategories;
 
-        //Constructor that initializes
-        public ProductManagerController()
+        //Constructor that initializes, and tells to accept 2 interfaces
+        public ProductManagerController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
-            context = new InMemoryRepository<Product>();
-            productCategories = new InMemoryRepository<ProductCategory>();
+            //Every time we create an instance of our ProductManagerController it's going to want to inject
+            //in a Irepository, a class that implements our repository product and a class that implements Irepository product category
+            context = productContext;
+            productCategories = productCategoryContext;
+            
         }
          
         // GET: ProductManager
