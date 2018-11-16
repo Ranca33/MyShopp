@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyShop.Core.Contracts;
+using MyShop.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,39 @@ namespace MyShop.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+
+        //load curent product and praductCategory from data base
+        IRepository<Product> context;
+        IRepository<ProductCategory> productCategories;
+
+        //Constructor that initializes, and tells to accept 2 interfaces
+        public HomeController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
+        {
+            //Every time we create an instance of our ProductManagerController it's going to want to inject
+            //in a Irepository, a class that implements our repository product and a class that implements Irepository product category
+            context = productContext;
+            productCategories = productCategoryContext;
+
+        }
+
         public ActionResult Index()
         {
-            return View();
+            List<Product> products = context.Collection().ToList();
+            return View(products);
+        }
+
+        public ActionResult Details(string Id)
+        {
+            Product product = context.Find(Id);
+
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(product);
+            }
         }
 
         public ActionResult About()
