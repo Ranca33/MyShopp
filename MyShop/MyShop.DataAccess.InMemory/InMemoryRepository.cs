@@ -71,7 +71,7 @@ namespace MyShop.DataAccess.InMemory
             }
         }
 
-        //Returns a list of items
+        //Returns a list(that can be queried) of items
         public IQueryable<T> Collection()
         {
             return items.AsQueryable();

@@ -37,7 +37,7 @@ namespace MyShop.DataAccess.SQL
             var t = Find(Id);
             if (context.Entry(t).State == EntityState.Detached)
                 dbSet.Attach(t);
-
+            //And once the object that we;re passing through is connected to our underlying entityframework we can than remove it
             dbSet.Remove(t);
         }
 
