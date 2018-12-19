@@ -19,7 +19,7 @@ namespace MyShop.WebUI.Controllers
         public HomeController(IRepository<Product> productContext, IRepository<ProductCategory> productCategoryContext)
         {
             //Every time we create an instance of our ProductManagerController it's going to want to inject
-            //in a Irepository, a class that implements our repository product and a class that implements Irepository product category
+            //in a Irepository, a class that implements our Irepository product and a class that implements Irepository product category
             context = productContext;
             productCategories = productCategoryContext;
 
