@@ -1,5 +1,6 @@
 ﻿using MyShop.Core.Contracts;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +26,26 @@ namespace MyShop.WebUI.Controllers
 
         }
 
-        public ActionResult Index()
+        //Category = null means nr 1 you can have a null item, 2 if you don't pass anything we asume its null
+        public ActionResult Index(string Category = null)
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            List<Product> products;
+            List<ProductCategory> categories = productCategories.Collection().ToList();
+            if(Category== null)
+            {
+                products = context.Collection().ToList();
+            }
+            else
+            {
+                //this is why we expose the collection as IQuariable because that will then allow us to create a filter, and in EF world
+                //this means the actuall called SQL will not be called untill the filter has been enumerated, in other words it would convert it 
+                //into a SQL statement that will filter this category list for us rather than sending everything back
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+            ProductListViewModel model = new ProductListViewModel();
+            model.Products = products;
+            model.productCategories = categories;
+            return View(model);
         }
 
         public ActionResult Details(string Id)
